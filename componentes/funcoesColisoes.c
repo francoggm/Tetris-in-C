@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 int colisaoFinal(int py, int fundo)
 {
     if (py == fundo)
@@ -15,12 +14,15 @@ int colisaoFinal(int py, int fundo)
         return 0;
 }
 
-int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
+int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py, int px)
 {
+    if (px - peca.pos.x != 0)
+        return 0;
+
     switch (peca.tipo)
     {
     case 1:
-        if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1])
+        if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1])
         {
             apagaPeca(peca, &tabuleiro);
             apagaQuadradosAdj(peca, &tabuleiro);
@@ -34,7 +36,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
         switch (peca.rot)
         {
         case 0:
-            if (tabuleiro.g[peca.pos.y + 4][peca.pos.x])
+            if (tabuleiro.g[py + 3][peca.pos.x])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -45,7 +47,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 1:
-            if (tabuleiro.g[peca.pos.y + 1][peca.pos.x] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 2] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 3])
+            if (tabuleiro.g[py][peca.pos.x] || tabuleiro.g[py][peca.pos.x + 1] || tabuleiro.g[py][peca.pos.x + 2] || tabuleiro.g[py][peca.pos.x + 3])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -61,7 +63,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
         switch (peca.rot)
         {
         case 0:
-            if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 2])
+            if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1] || tabuleiro.g[py][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -72,7 +74,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 1:
-            if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 3][peca.pos.x + 1])
+            if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py + 2][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -88,7 +90,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
         switch (peca.rot)
         {
         case 0:
-            if (tabuleiro.g[peca.pos.y + 1][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 2])
+            if (tabuleiro.g[py][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1] || tabuleiro.g[py + 1][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -99,7 +101,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 1:
-            if (tabuleiro.g[peca.pos.y + 3][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1])
+            if (tabuleiro.g[py + 2][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -115,7 +117,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
         switch (peca.rot)
         {
         case 0:
-            if (tabuleiro.g[peca.pos.y + 3][peca.pos.x] || tabuleiro.g[peca.pos.y + 3][peca.pos.x + 1])
+            if (tabuleiro.g[py + 2][peca.pos.x] || tabuleiro.g[py + 2][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -126,7 +128,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 1:
-            if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 2])
+            if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py][peca.pos.x + 1] || tabuleiro.g[py][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -137,7 +139,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 2:
-            if (tabuleiro.g[peca.pos.y + 1][peca.pos.x] || tabuleiro.g[peca.pos.y + 3][peca.pos.x + 1])
+            if (tabuleiro.g[py][peca.pos.x] || tabuleiro.g[py + 2][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -148,7 +150,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 3:
-            if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 2])
+            if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1] || tabuleiro.g[py + 1][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -164,7 +166,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
         switch (peca.rot)
         {
         case 0:
-            if (tabuleiro.g[peca.pos.y + 3][peca.pos.x] || tabuleiro.g[peca.pos.y + 3][peca.pos.x + 1])
+            if (tabuleiro.g[py + 2][peca.pos.x] || tabuleiro.g[py + 2][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -175,7 +177,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 1:
-            if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 2])
+            if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1] || tabuleiro.g[py + 1][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -186,7 +188,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 2:
-            if (tabuleiro.g[peca.pos.y + 3][peca.pos.x] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 1])
+            if (tabuleiro.g[py + 2][peca.pos.x] || tabuleiro.g[py][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -197,7 +199,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 3:
-            if (tabuleiro.g[peca.pos.y + 1][peca.pos.x] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 2])
+            if (tabuleiro.g[py][peca.pos.x] || tabuleiro.g[py][peca.pos.x + 1] || tabuleiro.g[py + 1][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -213,7 +215,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
         switch (peca.rot)
         {
         case 0:
-            if (tabuleiro.g[peca.pos.y + 1][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 1][peca.pos.x + 2])
+            if (tabuleiro.g[py][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1] || tabuleiro.g[py][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -224,7 +226,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 1:
-            if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 3][peca.pos.x + 1])
+            if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py + 2][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -235,7 +237,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 2:
-            if (tabuleiro.g[peca.pos.y + 2][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 2])
+            if (tabuleiro.g[py + 1][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1] || tabuleiro.g[py + 1][peca.pos.x + 2])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -246,7 +248,7 @@ int colisaoPecaPecaY(TABULEIRO tabuleiro, PECA peca, int py)
                 return 0;
             break;
         case 3:
-            if (tabuleiro.g[peca.pos.y + 3][peca.pos.x] || tabuleiro.g[peca.pos.y + 2][peca.pos.x + 1])
+            if (tabuleiro.g[py + 2][peca.pos.x] || tabuleiro.g[py + 1][peca.pos.x + 1])
             {
                 apagaPeca(peca, &tabuleiro);
                 apagaQuadradosAdj(peca, &tabuleiro);
@@ -515,14 +517,16 @@ int verificaColisao(PECA peca, int py, int px, pTABULEIRO tabuleiro)
     switch (peca.tipo)
     {
     case 1: //quadrado
-        if (colisaoFinal(py, Y - 1)){
-            if (peca.dif == 3){
+        if (colisaoFinal(py, Y - 1))
+        {
+            if (peca.dif == 3)
+            {
                 apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+                apagaQuadradosAdj(peca, &tabuleiro);
             }
             temPeca = !temPeca;
         }
-        if (py < Y - 1 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+        if (py < Y - 1 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
             return 1;
         else
             return 0;
@@ -531,29 +535,33 @@ int verificaColisao(PECA peca, int py, int px, pTABULEIRO tabuleiro)
         switch (peca.rot)
         {
         case 0:
-            if (colisaoFinal(py, Y - 3)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 3))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
                 }
                 temPeca = !temPeca;
             }
-            if (py < Y - 3 && (px < X && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 3 && (px < X && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
 
             break;
         case 1:
-            if (colisaoFinal(py, Y - 1)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 1))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y && (px < X - 3 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y && (px < X - 3 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
@@ -565,29 +573,33 @@ int verificaColisao(PECA peca, int py, int px, pTABULEIRO tabuleiro)
         switch (peca.rot)
         {
         case 0:
-            if (colisaoFinal(py, Y - 1)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 1))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
                 }
-                
-        temPeca = !temPeca;
+
+                temPeca = !temPeca;
             }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 1:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
@@ -599,29 +611,33 @@ int verificaColisao(PECA peca, int py, int px, pTABULEIRO tabuleiro)
         switch (peca.rot)
         {
         case 0:
-            if(colisaoFinal(py, Y - 1)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 1))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 1:
-            if (colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
@@ -633,57 +649,65 @@ int verificaColisao(PECA peca, int py, int px, pTABULEIRO tabuleiro)
         switch (peca.rot)
         {
         case 0:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 1:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 2:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 3:
-            if (colisaoFinal(py, Y - 1)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 1))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
@@ -694,57 +718,65 @@ int verificaColisao(PECA peca, int py, int px, pTABULEIRO tabuleiro)
         switch (peca.rot)
         {
         case 0:
-            if (colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 1:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 2:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 3:
-            if(colisaoFinal(py, Y - 1)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 1))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
@@ -755,57 +787,65 @@ int verificaColisao(PECA peca, int py, int px, pTABULEIRO tabuleiro)
         switch (peca.rot)
         {
         case 0:
-            if (colisaoFinal(py, Y - 1)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 1))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 1:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 2:
-            if(colisaoFinal(py, Y - 1)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 1))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 1 && (px < X - 2 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;
             break;
         case 3:
-            if(colisaoFinal(py, Y - 2)){
-                if (peca.dif == 3){
-                apagaPeca(peca, tabuleiro);
-                apagaQuadradosAdj(peca, tabuleiro);
+            if (colisaoFinal(py, Y - 2))
+            {
+                if (peca.dif == 3)
+                {
+                    apagaPeca(peca, tabuleiro);
+                    apagaQuadradosAdj(peca, &tabuleiro);
+                }
+
+                temPeca = !temPeca;
             }
-            
-        temPeca = !temPeca;
-            }
-            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py) && !colisaoPecaPecaX(*tabuleiro, peca, px))
+            if (py < Y - 2 && (px < X - 1 && px >= 0) && !colisaoPecaPecaY(*tabuleiro, peca, py, px) && !colisaoPecaPecaX(*tabuleiro, peca, px))
                 return 1;
             else
                 return 0;

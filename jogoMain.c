@@ -55,7 +55,7 @@ int main()
     imagens.pecaBomba = LoadTextureFromImage(pbomba);
     UnloadImage(paleatorio);
     UnloadImage(pbomba);
-    
+
     while (!WindowShouldClose())
     {
         SetTargetFPS(15);
@@ -82,7 +82,6 @@ int main()
             while (!WindowShouldClose())
             {
                 BeginDrawing();
-                DrawTexture(imagens.pecaAleatoria, 10, 10, WHITE);
                 SetTargetFPS(15);
                 ClearBackground(BLACK);
 
@@ -147,6 +146,7 @@ int main()
                                 {
                                     if (IsKeyDown(KEY_DOWN))
                                     {
+                                        SetTargetFPS(12);
                                         if (verificaColisao(peca[0], peca[0].pos.y + 1, peca[0].pos.x, &tabuleiro))
                                         { //para que o movimento realmente aconteça ele verifica se não há colisão no movimento esperado, portanto passa peca.pos.y+1 nesse caso
                                             peca[0].pos.y++;
@@ -158,6 +158,7 @@ int main()
 
                                 if (IsKeyDown(KEY_LEFT))
                                 {
+                                    SetTargetFPS(12);
                                     if (verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x - 1, &tabuleiro))
                                     { //similar com o caso anterior porem passando x-1 para o movimento da esquerda
                                         peca[0].pos.x--;
@@ -166,12 +167,14 @@ int main()
                                 }
 
                                 if (IsKeyDown(KEY_RIGHT))
+                                {
+                                    SetTargetFPS(12);
                                     if (verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x + 1, &tabuleiro))
                                     { //similar com os casos anteriores porem passando x+1 para o movimento a direita
                                         peca[0].pos.x++;
                                         preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x - 1); //similar com os casos anteriores
                                     }
-
+                                }
                                 if (IsKeyPressed(KEY_UP))
                                 {
                                     ydesce = desceTudo(&peca, tabuleiro);
@@ -179,48 +182,48 @@ int main()
                                 }
 
                                 //Sentido Horario
-                                if (IsKeyDown(KEY_X))
+                                if (IsKeyPressed(KEY_X))
                                 {
-                                    SetTargetFPS(12);
-                                    if (peca[0].dif == 2){
-                                apagaPeca(peca[0], &tabuleiro);
-                                do
-                                {
-                                    peca[0].tipo = GetRandomValue(1, 7);
-                                } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }else
-                            if (verificaColisaoRotacao(peca[0], tabuleiro, 1))
-                            {
-                                peca[0].rot++;
-                                setaRotacao(&peca, 1);
-                                rotacionaPeca(peca[0], &tabuleiro, 1);
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }
+                                    if (peca[0].dif == 2)
+                                    {
+                                        apagaPeca(peca[0], &tabuleiro);
+                                        do
+                                        {
+                                            peca[0].tipo = GetRandomValue(1, 7);
+                                        } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
+                                    else if (verificaColisaoRotacao(peca[0], tabuleiro, 1))
+                                    {
+                                        peca[0].rot++;
+                                        setaRotacao(&peca, 1);
+                                        rotacionaPeca(peca[0], &tabuleiro, 1);
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
                                 }
 
                                 //Sentido Anti-horario
-                                if (IsKeyDown(KEY_Z))
+                                if (IsKeyPressed(KEY_Z))
                                 {
-                                    SetTargetFPS(12);
-                                    if (peca[0].dif == 2){
-                                apagaPeca(peca[0], &tabuleiro);
-                                do
-                                {
-                                    peca[0].tipo = GetRandomValue(1, 7);
-                                } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }else
-                            if (verificaColisaoRotacao(peca[0], tabuleiro, -1))
-                            {
-                                peca[0].rot--;
-                                setaRotacao(&peca, -1);
-                                rotacionaPeca(peca[0], &tabuleiro, -1);
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }
+                                    if (peca[0].dif == 2)
+                                    {
+                                        apagaPeca(peca[0], &tabuleiro);
+                                        do
+                                        {
+                                            peca[0].tipo = GetRandomValue(1, 7);
+                                        } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
+                                    else if (verificaColisaoRotacao(peca[0], tabuleiro, -1))
+                                    {
+                                        peca[0].rot--;
+                                        setaRotacao(&peca, -1);
+                                        rotacionaPeca(peca[0], &tabuleiro, -1);
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
                                 }
 
-                                if(IsKeyPressed(KEY_R))
+                                if (IsKeyPressed(KEY_R))
                                 {
                                     //acabaJogo(screenWidth, screenHeight, &tabuleiro, ranking);
                                     resetaJogo(&tabuleiro);
@@ -279,14 +282,12 @@ int main()
                 for (j = 0; j < X; j++)
                     tabuleiro.g[i][j] = 0;
 
-            
-
             while (!WindowShouldClose())
             {
                 BeginDrawing();
                 SetTargetFPS(15);
                 ClearBackground(BLACK);
-                
+
                 //Inicializações
 
                 funcionalidadeTeclas();
@@ -383,45 +384,47 @@ int main()
                                 if (IsKeyDown(KEY_X))
                                 {
                                     SetTargetFPS(12);
-                                    if (peca[0].dif == 2){
-                                apagaPeca(peca[0], &tabuleiro);
-                                do
-                                {
-                                    peca[0].tipo = GetRandomValue(1, 7);
-                                } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }else
-                            if (verificaColisaoRotacao(peca[0], tabuleiro, 1))
-                            {
-                                peca[0].rot++;
-                                setaRotacao(&peca, 1);
-                                rotacionaPeca(peca[0], &tabuleiro, 1);
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }
+                                    if (peca[0].dif == 2)
+                                    {
+                                        apagaPeca(peca[0], &tabuleiro);
+                                        do
+                                        {
+                                            peca[0].tipo = GetRandomValue(1, 7);
+                                        } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
+                                    else if (verificaColisaoRotacao(peca[0], tabuleiro, 1))
+                                    {
+                                        peca[0].rot++;
+                                        setaRotacao(&peca, 1);
+                                        rotacionaPeca(peca[0], &tabuleiro, 1);
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
                                 }
 
                                 //Sentido Anti-horario
                                 if (IsKeyDown(KEY_Z))
                                 {
                                     SetTargetFPS(12);
-                                    if (peca[0].dif == 2){
-                                apagaPeca(peca[0], &tabuleiro);
-                                do
-                                {
-                                    peca[0].tipo = GetRandomValue(1, 7);
-                                } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }else
-                            if (verificaColisaoRotacao(peca[0], tabuleiro, -1))
-                            {
-                                peca[0].rot--;
-                                setaRotacao(&peca, -1);
-                                rotacionaPeca(peca[0], &tabuleiro, -1);
-                                preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
-                            }
+                                    if (peca[0].dif == 2)
+                                    {
+                                        apagaPeca(peca[0], &tabuleiro);
+                                        do
+                                        {
+                                            peca[0].tipo = GetRandomValue(1, 7);
+                                        } while (!verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x, &tabuleiro));
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
+                                    else if (verificaColisaoRotacao(peca[0], tabuleiro, -1))
+                                    {
+                                        peca[0].rot--;
+                                        setaRotacao(&peca, -1);
+                                        rotacionaPeca(peca[0], &tabuleiro, -1);
+                                        preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x);
+                                    }
                                 }
 
-                                if(IsKeyPressed(KEY_R))
+                                if (IsKeyPressed(KEY_R))
                                 {
                                     //acabaJogo(screenWidth, screenHeight, &tabuleiro, ranking);
                                     resetaJogo(&tabuleiro);
@@ -440,7 +443,7 @@ int main()
                         }
                         else
                         {
-                            
+
                             first = false;
                         }
 
@@ -468,11 +471,11 @@ int main()
                 }
 
                 EndDrawing();
-                if(jogoCarregado){
+                if (jogoCarregado)
+                {
                     carregaJogo(&peca, &tabuleiro);
                     jogoCarregado = 0;
                 }
-                    
             }
         }
         else if (opcao == 4)

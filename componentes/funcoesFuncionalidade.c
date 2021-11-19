@@ -44,7 +44,7 @@ int desceTudo(pPECA peca, TABULEIRO tabuleiro)
 
 int descida(pPECA peca, TABULEIRO tabuleiro, int fundo)
 {
-    if (colisaoFinal(peca->pos.y, fundo - 1) || colisaoPecaPecaY(tabuleiro, *peca, peca->pos.y))
+    if (colisaoFinal(peca->pos.y - 1, fundo - 1) || colisaoPecaPecaY(tabuleiro, *peca, peca->pos.y + 1, peca->pos.x))
     {
         return 0;
     }

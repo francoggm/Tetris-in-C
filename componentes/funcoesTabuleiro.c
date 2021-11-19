@@ -11,7 +11,6 @@ int pY(int y)
     return 1 + MARGEM + (y * TAM); //a partir da margem soma com o valor de y deslocamentos
 }
 
-
 void preencheMatriz(PECA peca, pTABULEIRO matriz, int vy, int vx)
 { //vy= velho y, vx=velho x
     int i, j;
@@ -403,25 +402,24 @@ void apagaPeca(PECA peca, pTABULEIRO matriz)
     }
 }
 
-
 void initPeca(pTABULEIRO tabuleiro, pPECA peca, pTEMPO time)
 { //paça o endereço de tabuleiro e peca no parametro para ser usado ponteiros
     //setando x e y da peça
     if (first)
     {
         tabuleiro->pontuacao = 0;
-        peca[0].tipo = 1;//GetRandomValue(1, 7);
-        peca[0].dif = 3; //GetRandomValue(1, 3);
-        peca[1].tipo = 1;//GetRandomValue(1, 7);
-        peca[1].dif = 3;//GetRandomValue(1, 3);
+        peca[0].tipo = GetRandomValue(1, 7);
+        peca[0].dif = GetRandomValue(1, 2);
+        peca[1].tipo = GetRandomValue(1, 7);
+        peca[1].dif = GetRandomValue(1, 2);
         first = !first;
     }
     else
     {
         peca[0].tipo = peca[1].tipo;
         peca[0].dif = peca[1].dif;
-        peca[1].tipo = 1;//GetRandomValue(1, 7);
-        peca[1].dif = 3;//GetRandomValue(1, 3);
+        peca[1].tipo = GetRandomValue(1, 7);
+        peca[1].dif = GetRandomValue(1, 2);
     }
 
     int i, j;
@@ -548,60 +546,66 @@ void redesenhaTabuleiro(int y, pTABULEIRO tabuleiro)
             }
 }
 
-void apagaQuadradosAdj(PECA peca, pTABULEIRO tabuleiro){
+void apagaQuadradosAdj(PECA peca, pTABULEIRO tabuleiro)
+{
     int py = peca.pos.y, px = peca.pos.x;
-    switch (peca.tipo){
-        case 1:
-            if(px==0){
-                tabuleiro ->g[py+2][px]=0;
-                tabuleiro ->g[py+2][px+1]=0;
-                tabuleiro ->g[py][px+2]=0;
-                tabuleiro ->g[py+1][px+2]=0;
-                tabuleiro ->g[py-1][px]=0;
-                tabuleiro ->g[py-1][px+1]=0;
-            }
-            if (px==X-2){
-                tabuleiro ->g[py+2][px]=0;
-                tabuleiro ->g[py+2][px+1]=0;
-                tabuleiro ->g[py][px-1]=0;
-                tabuleiro ->g[py+1][px-1]=0;
-                tabuleiro ->g[py-1][px]=0;
-                tabuleiro ->g[py-1][px+1]=0;
-            }
-            if (!py==Y-2){
-                tabuleiro ->g[py][px+2]=0;
-                tabuleiro ->g[py+1][px+2]=0;
-                tabuleiro ->g[py][px-1]=0;
-                tabuleiro ->g[py+1][px-1]=0;
-                tabuleiro ->g[py-1][px]=0;
-                tabuleiro ->g[py-1][px+1]=0;
-            }
+    switch (peca.tipo)
+    {
+    case 1:
+        if (px == 0)
+        {
+            tabuleiro->g[py + 2][px] = 0;
+            tabuleiro->g[py + 2][px + 1] = 0;
+            tabuleiro->g[py][px + 2] = 0;
+            tabuleiro->g[py + 1][px + 2] = 0;
+            tabuleiro->g[py - 1][px] = 0;
+            tabuleiro->g[py - 1][px + 1] = 0;
+        }
+        if (px == X - 2)
+        {
+            tabuleiro->g[py + 2][px] = 0;
+            tabuleiro->g[py + 2][px + 1] = 0;
+            tabuleiro->g[py][px - 1] = 0;
+            tabuleiro->g[py + 1][px - 1] = 0;
+            tabuleiro->g[py - 1][px] = 0;
+            tabuleiro->g[py - 1][px + 1] = 0;
+        }
+        if (!py == Y - 2)
+        {
+            tabuleiro->g[py][px + 2] = 0;
+            tabuleiro->g[py + 1][px + 2] = 0;
+            tabuleiro->g[py][px - 1] = 0;
+            tabuleiro->g[py + 1][px - 1] = 0;
+            tabuleiro->g[py - 1][px] = 0;
+            tabuleiro->g[py - 1][px + 1] = 0;
+        }
 
-            /*for (i = 0; i < 4; i++)
+        /*for (i = 0; i < 4; i++)
                 for (j = 0; j < 4; j++)
                     if(px==0 && j == 0){
                     tabuleiro->g[i][j+1];*/
-                    
+
         break;
-        case 2:
-            switch(peca.rot){
-                case 0:
-                    tabuleiro->g[py][px+1] = 0;
-                break;
-                case 1:
-                break;
-            }
-            
+    case 2:
+        switch (peca.rot)
+        {
+        case 0:
+            tabuleiro->g[py][px + 1] = 0;
+            break;
+        case 1:
+            break;
+        }
+
         break;
-        case 3:
+    case 3:
         break;
-        case 4:
+    case 4:
         break;
-        case 5:
+    case 5:
         break;
-        case 6:
+    case 6:
         break;
-        case 7:
+    case 7:
         break;
     }
 }

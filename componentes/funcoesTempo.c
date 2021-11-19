@@ -1,6 +1,5 @@
 #include <time.h>
 
-
 void inicia(pTEMPO temp)
 {
     temp->inicio = clock();

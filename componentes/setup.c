@@ -14,7 +14,6 @@
 #define NOMEALEATORIO "resources/interroga.png"
 #define NOMEBOMBA "resources/Bomba.png"
 
-
 static bool temPeca = false; //variavel global para verificação se ja estiver uma peça em movimento
 static bool gameOver = false;
 static bool first = true;
@@ -26,13 +25,11 @@ typedef struct _ranking
     int pontuacao, qtd;
 } RANK, *pRANK;
 
-
 typedef struct _time
 {
     time_t inicio;
     time_t fim;
 } TEMPO, *pTEMPO;
-
 
 //struct posição
 typedef struct _posicao
@@ -49,7 +46,6 @@ typedef struct _peca
     int rot;
     int dif;
 } PECA, *pPECA;
-
 
 //struct para o tabuleiro
 typedef struct _tabuleiro
@@ -68,8 +64,6 @@ typedef struct _imagens
 
 Vector2 tamanhoB = {TAM, TAM};
 
-
-
 //função para verificar colisão de acordo com a matriz
 int verificaColisao(PECA, int, int, pTABULEIRO);
 
@@ -79,7 +73,7 @@ int verificaColisaoRotacao(PECA, TABULEIRO, int);
 //funcao para verificar se  apeca chegou no fundo
 int colisaoFinal(int, int);
 
-int colisaoPecaPecaY(TABULEIRO, PECA, int);
+int colisaoPecaPecaY(TABULEIRO, PECA, int, int);
 
 int colisaoPecaPecaX(TABULEIRO, PECA, int);
 
