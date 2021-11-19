@@ -219,15 +219,19 @@ void funcionalidadeTeclas()
 
 void desenhaMenu(int screenWidth)
 {
-    DrawText("T", (screenWidth / 2) - 100, 50, 50, BLUE);
-    DrawText("E", (screenWidth / 2) - 50, 50, 50, RED);
-    DrawText("T", (screenWidth / 2) - 10, 50, 50, YELLOW);
-    DrawText("R", (screenWidth / 2) + 40, 50, 50, PINK);
-    DrawText("I", (screenWidth / 2) + 90, 50, 50, PURPLE);
-    DrawText("S", (screenWidth / 2) + 120, 50, 50, GREEN);
+    DrawText("T", (screenWidth / 2) - 145, 50, 50, BLUE);
+    DrawText("E", (screenWidth / 2) - 95, 50, 50, RED);
+    DrawText("T", (screenWidth / 2) - 55, 50, 50, YELLOW);
+    DrawText("R", (screenWidth / 2) - 5, 50, 50, PINK);
+    DrawText("I", (screenWidth / 2) + 45, 50, 50, PURPLE);
+    DrawText("S", (screenWidth / 2) + 75, 50, 50, GREEN);
 
-    DrawText("Novo Jogo", 580, 350, 30, WHITE);
-    DrawText("Carregar Jogo", 545, 400, 30, WHITE);
-    DrawText("Resultados", 570, 450, 30, WHITE);
-    DrawText("Sair", 625, 500, 30, WHITE);
+    DrawText("Clique na opcao", (screenWidth / 2) - 75, 300, 14, MAROON);
+    DrawText("Novo Jogo", (screenWidth / 2) - 100, 350, 30, WHITE);
+    DrawText("Carregar Jogo", (screenWidth / 2) - 135, 400, 30, WHITE);
+    DrawText("Resultados", (screenWidth / 2) - 106, 450, 30, WHITE);
+    DrawText("Sair", (screenWidth / 2) - 55, 500, 30, WHITE);
 }
+
+
+                              

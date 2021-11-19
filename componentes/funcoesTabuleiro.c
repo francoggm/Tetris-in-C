@@ -431,14 +431,31 @@ void initPeca(pTABULEIRO tabuleiro, pPECA peca, pTEMPO time)
     case 1: //Quadrado
         for (i = 0; i < 2; i++)
             for (j = 0; j < 2; j++)
-                tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1; //preenche matriz do tabuleiro de acordo com a forma para ser desenhada
-        peca[0].cor = BLUE;                                             //seleciona a cor da peca
-        temPeca = !temPeca;                                             //muda a variavel que informa se tem peça para true
+            {
+                if (tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j])
+                {
+                    acabaJogo(screenWidth, screenHeight, &tabuleiro);
+                    return;
+                }
+                else
+                    tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1; //preenche matriz do tabuleiro de acordo com a forma para ser desenhada
+            }                                                               //seleciona a cor da peca
+        peca[0].cor = BLUE;
+        temPeca = !temPeca; //muda a variavel que informa se tem peça para true
         break;
     //segue a mesma logica para as outras formas
     case 2: //I
         for (i = 0; i < 4; i++)
-            tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x] = 1;
+        {
+            if (tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x])
+            {
+                acabaJogo(screenWidth, screenHeight, &tabuleiro);
+                return;
+            }
+
+            else
+                tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x] = 1;
+        }
         peca[0].cor = RED;
         temPeca = !temPeca;
         break;
@@ -449,7 +466,14 @@ void initPeca(pTABULEIRO tabuleiro, pPECA peca, pTEMPO time)
             for (j = 0; j < 3; j++)
                 if (!(i == 0 && j == 0) && !(i == 1 && j == 2))
                 {
-                    tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                    if (tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j])
+                    {
+                        acabaJogo(screenWidth, screenHeight, &tabuleiro);
+                        return;
+                    }
+
+                    else
+                        tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
                 }
         peca[0].cor = YELLOW;
         temPeca = !temPeca;
@@ -462,7 +486,14 @@ void initPeca(pTABULEIRO tabuleiro, pPECA peca, pTEMPO time)
             {
                 if (!(i == 0 && j == 2) && !(i == 1 && j == 0))
                 {
-                    tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                    if (tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j])
+                    {
+                        acabaJogo(screenWidth, screenHeight, &tabuleiro);
+                        return;
+                    }
+
+                    else
+                        tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
                 }
             }
         peca[0].cor = PINK;
@@ -473,7 +504,16 @@ void initPeca(pTABULEIRO tabuleiro, pPECA peca, pTEMPO time)
         for (i = 0; i < 3; i++)
             for (j = 0; j < 2; j++)
                 if (!(i == 0 && j == 1) && !(i == 1 && j == 1))
-                    tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                {
+                    if (tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j])
+                    {
+                        acabaJogo(screenWidth, screenHeight, &tabuleiro);
+                        return;
+                    }
+
+                    else
+                        tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                }
 
         peca[0].cor = PURPLE;
         temPeca = !temPeca;
@@ -483,7 +523,15 @@ void initPeca(pTABULEIRO tabuleiro, pPECA peca, pTEMPO time)
         for (i = 0; i < 3; i++)
             for (j = 0; j < 2; j++)
                 if (!(i == 0 && j == 0) && !(i == 1 && j == 0))
-                    tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                {
+                    if (tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j])
+                    {
+                        acabaJogo(screenWidth, screenHeight, &tabuleiro);
+                        return;
+                    }
+                    else
+                        tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                }
 
         peca[0].cor = GREEN;
         temPeca = !temPeca;
@@ -494,7 +542,15 @@ void initPeca(pTABULEIRO tabuleiro, pPECA peca, pTEMPO time)
         for (i = 0; i < 2; i++)
             for (j = 0; j < 3; j++)
                 if (!(i == 1 && j == 0) && !(i == 1 && j == 2))
-                    tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                {
+                    if (tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j])
+                    {
+                        acabaJogo(screenWidth, screenHeight, &tabuleiro);
+                        return;
+                    }
+                    else
+                        tabuleiro->g[peca[0].pos.y + i][peca[0].pos.x + j] = 1;
+                }
 
         peca[0].cor = MAROON;
         temPeca = !temPeca;

@@ -21,6 +21,9 @@ static bool gameOver = false;
 static bool first = true;
 static bool pausado = false;
 
+const int screenWidth = 1280;
+const int screenHeight = 720;
+
 typedef struct _ranking
 {
     char nome;
@@ -117,7 +120,7 @@ void salvaJogo(pPECA, pTABULEIRO);
 
 void carregaJogo(pPECA, pTABULEIRO);
 
-void acabaJogo(int, int, pTABULEIRO, pRANK);
+void acabaJogo(int, int, pTABULEIRO);
 
 void resetaJogo(pTABULEIRO);
 

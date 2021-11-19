@@ -43,7 +43,7 @@ void carregaJogo(pPECA peca, pTABULEIRO tabuleiro)
     }
 }
 
-void acabaJogo(int larguraTela, int alturaTela, pTABULEIRO tabuleiro, pRANK ranking)
+void acabaJogo(int larguraTela, int alturaTela, pTABULEIRO tabuleiro)
 {
     int qtd;
     gameOver = true;
