@@ -13,6 +13,8 @@
 #define MAXPONTUACAO 101
 #define NOMEALEATORIO "resources/interroga.png"
 #define NOMEBOMBA "resources/Bomba.png"
+#define NOMEMUSICA "resources/SheWas.mp3"
+#define NOMEMUSICA1 "resources/MainTheme.mp3"
 
 static bool temPeca = false; //variavel global para verificação se ja estiver uma peça em movimento
 static bool gameOver = false;

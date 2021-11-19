@@ -56,9 +56,18 @@ int main()
     UnloadImage(paleatorio);
     UnloadImage(pbomba);
 
+    InitAudioDevice();
+    Music musicMenu = LoadMusicStream(NOMEMUSICA);
+    Music musicJogo = LoadMusicStream(NOMEMUSICA1);
+
+    PlayMusicStream(musicMenu);
+
+    SetMusicVolume(musicMenu, 0.05);
+
     while (!WindowShouldClose())
     {
-        SetTargetFPS(15);
+        SetTargetFPS(60);
+        UpdateMusicStream(musicMenu);
         BeginDrawing();
 
         ClearBackground(BLACK);
@@ -73,16 +82,19 @@ int main()
             temPeca = false;
             gameOver = false;
             tabuleiro.dificuldade = 30;
-
+            PlayMusicStream(musicJogo);
+            SetMusicVolume(musicJogo, 0.001); 
             //laço para zerar a matriz tabuleiro
             for (i = 0; i < Y; i++)
                 for (j = 0; j < X; j++)
                     tabuleiro.g[i][j] = 0;
 
             while (!WindowShouldClose())
-            {
+            {   
+                SetTargetFPS(60);
+                UpdateMusicStream(musicJogo); 
                 BeginDrawing();
-                SetTargetFPS(15);
+                
                 ClearBackground(BLACK);
 
                 //Inicializações
@@ -112,7 +124,7 @@ int main()
 
                 if (!gameOver)
                 {
-
+                    
                     if (IsKeyPressed(KEY_ENTER))
                     {
                         if (pausado == false)
@@ -152,7 +164,6 @@ int main()
                                             peca[0].pos.y++;
                                             preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y - 1, peca[0].pos.x); //passa por parametro a struct peca o endereco do tabuleiro e as novas posições para y e x
                                         }
-                                        //}
                                     }
                                 }
 
@@ -277,6 +288,9 @@ int main()
             gameOver = false;
             tabuleiro.dificuldade = 30;
 
+            PlayMusicStream(musicJogo);
+            SetMusicVolume(musicJogo, 0.001); 
+
             //laço para zerar a matriz tabuleiro
             for (i = 0; i < Y; i++)
                 for (j = 0; j < X; j++)
@@ -284,8 +298,10 @@ int main()
 
             while (!WindowShouldClose())
             {
+                SetTargetFPS(60);
+                UpdateMusicStream(musicJogo); 
                 BeginDrawing();
-                SetTargetFPS(15);
+                
                 ClearBackground(BLACK);
 
                 //Inicializações
@@ -315,7 +331,7 @@ int main()
 
                 if (!gameOver)
                 {
-
+                    
                     if (IsKeyPressed(KEY_ENTER))
                     {
                         if (pausado == false)
@@ -349,17 +365,18 @@ int main()
                                 {
                                     if (IsKeyDown(KEY_DOWN))
                                     {
+                                        SetTargetFPS(12);
                                         if (verificaColisao(peca[0], peca[0].pos.y + 1, peca[0].pos.x, &tabuleiro))
                                         { //para que o movimento realmente aconteça ele verifica se não há colisão no movimento esperado, portanto passa peca.pos.y+1 nesse caso
                                             peca[0].pos.y++;
                                             preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y - 1, peca[0].pos.x); //passa por parametro a struct peca o endereco do tabuleiro e as novas posições para y e x
                                         }
-                                        //}
                                     }
                                 }
 
                                 if (IsKeyDown(KEY_LEFT))
                                 {
+                                    SetTargetFPS(12);
                                     if (verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x - 1, &tabuleiro))
                                     { //similar com o caso anterior porem passando x-1 para o movimento da esquerda
                                         peca[0].pos.x--;
@@ -367,13 +384,14 @@ int main()
                                     }
                                 }
 
-                                if (IsKeyDown(KEY_RIGHT))
+                                if (IsKeyDown(KEY_RIGHT)){
+                                    SetTargetFPS(12);
                                     if (verificaColisao(peca[0], peca[0].pos.y, peca[0].pos.x + 1, &tabuleiro))
                                     { //similar com os casos anteriores porem passando x+1 para o movimento a direita
                                         peca[0].pos.x++;
                                         preencheMatriz(peca[0], &tabuleiro, peca[0].pos.y, peca[0].pos.x - 1); //similar com os casos anteriores
                                     }
-
+                                }
                                 if (IsKeyPressed(KEY_UP))
                                 {
                                     ydesce = desceTudo(&peca, tabuleiro);
@@ -381,9 +399,9 @@ int main()
                                 }
 
                                 //Sentido Horario
-                                if (IsKeyDown(KEY_X))
+                                if (IsKeyPressed(KEY_X))
                                 {
-                                    SetTargetFPS(12);
+
                                     if (peca[0].dif == 2)
                                     {
                                         apagaPeca(peca[0], &tabuleiro);
@@ -403,9 +421,8 @@ int main()
                                 }
 
                                 //Sentido Anti-horario
-                                if (IsKeyDown(KEY_Z))
+                                if (IsKeyPressed(KEY_Z))
                                 {
-                                    SetTargetFPS(12);
                                     if (peca[0].dif == 2)
                                     {
                                         apagaPeca(peca[0], &tabuleiro);
@@ -484,6 +501,10 @@ int main()
         }
         EndDrawing();
     }
+    UnloadMusicStream(musicMenu);
+    UnloadMusicStream(musicJogo);
+
+    CloseAudioDevice();
 
     return 0;
 }
